@@ -1,0 +1,6 @@
+@TipatChalav_HostAddress = http://localhost:5106
+
+GET {{TipatChalav_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
