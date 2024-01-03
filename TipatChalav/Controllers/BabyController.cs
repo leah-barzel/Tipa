@@ -5,71 +5,8 @@ using System.Xml.Linq;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace TipatChalav.Controllers
-{
-    [Route("api/[controller]")]
-    [ApiController]
-    public class BabyController : ControllerBase
-    {
-
-        //private readonly DataContex _context = new DataContex();
-        private static List<Baby> babies = new List<Baby> { new Baby { Id = 1, Name = "default", DateBorn = DateTime.Now.Date } };
-        // GET: api/<BabyController>
-        [HttpGet]
-        public IEnumerable<Baby> Get()
-        {
-            return babies;
-        }
-        // GET api/<BabyController>/5
-        [HttpGet("{id}")]
-        public IActionResult Get(int id)
-        {
-            var Baby = babies.Find(b => b.Id == id);
-            //return babys.Find(b => b.Id == id);
-            if (Baby == null)
-            {
-                return NotFound();
-            }
-            return Ok(Baby);
-        }
-
-        // POST api/<BabyController>
-        [HttpPost]
-        public void Post( [FromBody] Baby baby)
-        {
-
-            babies.Add(baby);
-
-        }
-
-        // PUT api/<BabyController>/5
-        [HttpPut("{id}")]
-        public IActionResult Put( [FromBody] Baby updatedBaby)
-        {
-            var baby = babies.FirstOrDefault(b => b.Id == id);
-            if (baby != null)
-            {
-                baby.Name = updatedBaby.Name;
-                baby.DateBorn = updatedBaby.DateBorn;
-                return Ok(baby);
-            }
-            return NotFound();
-
-        }
-
-        // DELETE api/<BabyController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id, string name)
-        {
-            Baby baby = babies.Find(b => b.Id == id);
-            if (baby != null)
-            {
-                babies.Remove(baby);
-            }
-        }
-    }
-}
-    /*
+namespace TipatChalav.Controllers 
+{ 
 
         [Route("api/[controller]")]
         [ApiController]
@@ -77,13 +14,11 @@ namespace TipatChalav.Controllers
         {
 
 
-            private readonly DataContex _context;
-            public BabyController(IDataContex context)
+            private readonly IDataContext _context;
+            public BabyController(IDataContext context)
             {
-                _context = (DataContex?)context;
+                _context = context;
             }
-            //= new DataContex();
-            // private static List<Baby> babys = new List<Baby> { new Baby { Id = 1, Name = "default", DateBorn = DateTime.Now.Date } };
             // GET: api/<BabyController>
             [HttpGet]
             public IEnumerable<Baby> Get()
@@ -105,7 +40,7 @@ namespace TipatChalav.Controllers
 
             // POST api/<BabyController>
             [HttpPost]
-            public void Post(int id, string name, DateTime dateTime, [FromBody] Baby baby)
+            public void Post( [FromBody] Baby baby)
             {
 
                 _context.Babies.Add(baby);
@@ -139,19 +74,9 @@ namespace TipatChalav.Controllers
             }
         }
 
-        public interface IDataContex
-        {
-        }
     }
 
 
-
-
-
-
-
-
-    */
 
 
 
