@@ -1,10 +1,12 @@
-﻿namespace TipatChalav
+﻿using Baby.Data.Repository;
+
+namespace TipatChalav
 {
-    public class DataContex : IDataContext
+    public class DataContext : IDataContext
     {
         public List<Baby> Babies { get; set; }
 
-        public DataContex()
+        public DataContext()
         {
            Babies = new List<Baby> { new Baby { Id = 1, Name = "default", DateBorn = DateTime.Now.Date} };
         }
