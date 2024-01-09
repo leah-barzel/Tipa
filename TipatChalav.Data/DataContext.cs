@@ -1,5 +1,4 @@
-﻿using Baby.Data.Repository;
-
+﻿using Tipa.Data.Repository;
 namespace TipatChalav
 {
     public class DataContext : IDataContext

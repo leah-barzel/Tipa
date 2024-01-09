@@ -8,10 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TipatChalav.Core\Tipa.Core.csproj" />
     <ProjectReference Include="..\TipatChalav.Service\Tipa.Service.csproj" />
   </ItemGroup>
 
