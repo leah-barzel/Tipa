@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using TipatChalav;
 
-namespace Tipa.Data.Repository
+namespace Tipa.Core.repositories.services
 {
-    public interface IBabyRepository
+    public interface IBabyService
     {
-        List<Baby> GetAll();
+        IEnumerable<Baby> GetAll();
         List<Baby> GetList();
     }
 }

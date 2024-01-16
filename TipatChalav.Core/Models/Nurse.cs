@@ -6,9 +6,9 @@
 
     {
 
-        public int ID { get; set; }
+        public int Id { get; set; }
 
-        public string NAME { get; set; }
+        public string Name { get; set; }
 
     }
 

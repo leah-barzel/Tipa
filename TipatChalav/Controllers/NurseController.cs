@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
 using System.Collections.Generic;
-
-
+using Tipa.Core.services;
+using Tipa.Service;
 
 namespace TipatChalav.Controllers
 
@@ -13,11 +13,14 @@ namespace TipatChalav.Controllers
     [ApiController]
 
     public class NurseController : ControllerBase
-
     {
+        //private static List<Nurse> nurses = new List<Nurse> { new Nurse { Id = 1, Name = "default" } };
 
-        private static List<Nurse> nurses = new List<Nurse> { new Nurse { ID = 1, NAME = "default" } };
-
+        private readonly INurseService _nurseService;
+        public NurseController(INurseService nurseService)
+        {
+            _nurseService = nurseService;   
+        }
 
 
         [HttpGet]
@@ -26,7 +29,7 @@ namespace TipatChalav.Controllers
 
         {
 
-            return nurses;
+            return _nurseService.GetAll();
 
         }
 
@@ -34,20 +37,16 @@ namespace TipatChalav.Controllers
 
         [HttpGet("{id}")]
 
-        public IActionResult Get(int id)
+        public ActionResult Get(int id)
 
         {
-
-            var nurse = nurses.Find(n => n.ID == id);
+            var nurse = _nurseService.GetById(id);
 
             if (nurse == null)
 
             {
-
                 return NotFound();
-
             }
-
             return Ok(nurse);
 
         }
@@ -56,55 +55,41 @@ namespace TipatChalav.Controllers
 
         [HttpPost]
 
-        public void Post([FromBody] Nurse nurse)
+        public ActionResult Post([FromBody] Nurse nurse)
 
         {
+            var newNurse = _nurseService.add(nurse);
 
-            nurses.Add(nurse);
-
+            return Ok(newNurse);
         }
 
 
 
         [HttpPut("{id}")]
-
-        public IActionResult Put(int id, [FromBody] Nurse updatedNurse)
-
+        public ActionResult Put(int id, [FromBody] Nurse updatedNurse)
         {
-
-            var nurse = nurses.Find(n => n.ID == id);
-
-            if (nurse != null)
-
+            if (updatedNurse != null)
             {
-
-                nurse.NAME = updatedNurse.NAME;
+            var nurse = _nurseService.Update(id, updatedNurse);
 
                 return Ok(nurse);
-
             }
-
             return NotFound();
-
         }
 
-
-
         [HttpDelete("{id}")]
-
-        public void Delete(int id)
+        public ActionResult Delete(int id)
 
         {
 
-            var nurse = nurses.Find(n => n.ID == id);
+            var nurse = _nurseService.GetById(id);
 
-            if (nurse != null)
-
+            if (nurse is null)
             {
-
-                nurses.Remove(nurse);
-
+                return NotFound();
             }
+            _nurseService.delete(id);
+            return NoContent(); 
 
         }
 
